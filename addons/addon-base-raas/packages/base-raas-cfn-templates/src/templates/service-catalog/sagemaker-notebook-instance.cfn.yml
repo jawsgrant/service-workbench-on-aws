@@ -137,6 +137,15 @@ Resources:
                     - AppStreamEnabled
                     - Fn::ImportValue: !Sub '${SolutionNamespace}-S3AppStreamVPCE'
                     - Fn::ImportValue: !Sub '${SolutionNamespace}-S3NonAppStreamVPCE'
+          - !If
+            - AppStreamEnabled
+            - Effect: Deny
+              Action: 'sts:*'
+              Resource: '*'
+              Condition:
+                StringNotEquals:
+                  aws:SourceVpce:
+                    - Fn::ImportValue: !Sub '${SolutionNamespace}-STSAppStreamVPCE'
 
   IAMRoleSageMakerURL:
     Type: 'AWS::IAM::Role'

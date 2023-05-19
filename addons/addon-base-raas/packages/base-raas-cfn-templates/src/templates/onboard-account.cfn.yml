@@ -1276,3 +1276,10 @@ Outputs:
     Value: !Ref S3Endpoint
     Export:
       Name: !Join [ '', [ Ref: Namespace, '-S3AppStreamVPCE' ] ]
+
+  STSAppStreamVPCE:
+    Description: S3 interface endpoint
+    Condition: isAppStream
+    Value: !Ref STSEndpoint
+    Export:
+      Name: !Join [ '', [ Ref: Namespace, '-STSAppStreamVPCE' ] ]
